@@ -1,0 +1,63 @@
+<entity-engine-xml>
+
+    <!-- Catalog Definition -->
+    <ProdCatalog prodCatalogId="DIWALI_DHAMAKA" catalogName="DIWALI DHAMAKA FESTIVE CATALOG" useQuickAdd="Y"/>
+    
+    <!-- Category Definitions -->
+    <ProductCategory productCategoryId="FESTIVE_COLLECTION" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Festive Collection"/>
+    <ProductCategory productCategoryId="ETHNIC_WEAR" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Ethnic Wear"/>
+    <ProductCategory productCategoryId="SWEETS" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Festive Sweets"/>
+    <ProductCategory productCategoryId="DECORATIONS" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Home Decorations"/>
+    
+    <!-- Category Rollups (Parent to Child mapping) -->
+    <ProductCategoryRollup parentProductCategoryId="FESTIVE_COLLECTION" productCategoryId="ETHNIC_WEAR" fromDate="2024-10-01 00:00:00.0"/>
+    <ProductCategoryRollup parentProductCategoryId="FESTIVE_COLLECTION" productCategoryId="SWEETS" fromDate="2024-10-01 00:00:00.0"/>
+    <ProductCategoryRollup parentProductCategoryId="FESTIVE_COLLECTION" productCategoryId="DECORATIONS" fromDate="2024-10-01 00:00:00.0"/>
+    
+    <!-- Catalog to Category Association -->
+    <ProdCatalogCategory prodCatalogId="DIWALI_DHAMAKA" productCategoryId="FESTIVE_COLLECTION" fromDate="2024-10-01 00:00:00.0" sequenceNum="1" prodCatalogCategoryTypeId="PCCT_BROWSE_ROOT"/>
+    
+    <!-- Product Definitions -->
+    <!-- Ethnic Wear -->
+    <Product productId="WOMENS-SAREE" productTypeId="FINISHED_GOOD" internalName="Designer Silk Saree" isVirtual="N" isVariant="N"/>
+    <Product productId="MENS-KURTA" productTypeId="FINISHED_GOOD" internalName="Men's Festive Kurta Set" isVirtual="N" isVariant="N"/>
+    
+    <!-- Sweets -->
+    <Product productId="KAJU-KATLI" productTypeId="FINISHED_GOOD" internalName="Premium Kaju Katli (1KG)" isVirtual="N" isVariant="N"/>
+    <Product productId="ASSORTED-MITHAI" productTypeId="FINISHED_GOOD" internalName="Assorted Diwali Mithai Box" isVirtual="N" isVariant="N"/>
+    
+    <!-- Decorations -->
+    <Product productId="DIYA-SET" productTypeId="FINISHED_GOOD" internalName="Handcrafted Terracotta Diya Set" isVirtual="N" isVariant="N"/>
+    <Product productId="LED-FAIRY-LIGHTS" productTypeId="FINISHED_GOOD" internalName="Warm White LED Fairy Lights" isVirtual="N" isVariant="N"/>
+    
+    <!-- Product Prices -->
+    <!-- Ethnic Wear Prices -->
+    <ProductPrice productId="WOMENS-SAREE" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-10-01 00:00:00.0" price="199.99"/>
+    <ProductPrice productId="MENS-KURTA" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-10-01 00:00:00.0" price="89.50"/>
+    
+    <!-- Sweets Prices -->
+    <ProductPrice productId="KAJU-KATLI" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-10-01 00:00:00.0" price="25.00"/>
+    <ProductPrice productId="ASSORTED-MITHAI" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-10-01 00:00:00.0" price="35.50"/>
+    
+    <!-- Decorations Prices -->
+    <ProductPrice productId="DIYA-SET" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-10-01 00:00:00.0" price="12.99"/>
+    <ProductPrice productId="LED-FAIRY-LIGHTS" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-10-01 00:00:00.0" price="18.00"/>
+
+    <!-- Product to Category Memberships -->
+    <!-- Ethnic Wear -->
+    <ProductCategoryMember productCategoryId="ETHNIC_WEAR" productId="WOMENS-SAREE" fromDate="2024-10-01 00:00:00.0" sequenceNum="1"/>
+    <ProductCategoryMember productCategoryId="ETHNIC_WEAR" productId="MENS-KURTA" fromDate="2024-10-01 00:00:00.0" sequenceNum="2"/>
+    
+    <!-- Sweets -->
+    <ProductCategoryMember productCategoryId="SWEETS" productId="KAJU-KATLI" fromDate="2024-10-01 00:00:00.0" sequenceNum="1"/>
+    <ProductCategoryMember productCategoryId="SWEETS" productId="ASSORTED-MITHAI" fromDate="2024-10-01 00:00:00.0" sequenceNum="2"/>
+    
+    <!-- Decorations -->
+    <ProductCategoryMember productCategoryId="DECORATIONS" productId="DIYA-SET" fromDate="2024-10-01 00:00:00.0" sequenceNum="1"/>
+    <ProductCategoryMember productCategoryId="DECORATIONS" productId="LED-FAIRY-LIGHTS" fromDate="2024-10-01 00:00:00.0" sequenceNum="2"/>
+    
+    <!-- Product Store to Catalog Association (Assuming store 9000 like in your example) -->
+    <ProductStoreCatalog productStoreId="9000" prodCatalogId="DIWALI_DHAMAKA" fromDate="2024-10-01 00:00:00.0" sequenceNum="3"/>
+
+</entity-engine-xml>
+

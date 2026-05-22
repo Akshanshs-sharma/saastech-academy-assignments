@@ -27,9 +27,6 @@ To run an OFBiz plugin assignment in your local environment, follow these steps:
    ./gradlew ofbiz
    ```
 
-### 2. Moqui & SQL Assignments
-
-*(Specific setup instructions for Moqui components and standalone SQL scripts will be added as those assignments are published.)*
 
 ## Author
 
