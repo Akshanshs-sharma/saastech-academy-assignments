@@ -5,6 +5,7 @@ Welcome to my repository for coding and technical assignments for the SaaS Tech 
 ## Repository Structure
 
 - `relationshipmgr/` - Apache OFBiz plugin/component for managing party relationships.
+- `Product assignment/` - Custom product catalog assignment (Diwali theme) containing seed data and images.
 *(More assignments will be added here...)*
 
 ## Setup and Usage
