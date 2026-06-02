@@ -1,0 +1,46 @@
+{
+  "id": "gid://shopify/Order/11839453462639",
+  "name": "#1004",
+  "createdAt": "2026-05-22T10:23:20Z",
+  "displayFulfillmentStatus": "UNFULFILLED",
+  
+
+  "noteAttributes": [
+    {
+      "key": "selling_store_id",
+      "value": "gid://shopify/Location/987654321"
+    }
+  ],
+
+  "lineItems": {
+    "edges": [
+      {
+        "node": {
+          "id": "gid://shopify/LineItem/35165680762991",
+          "title": "Puff sleeve Top",
+          "sku": "MH09PINK",
+          "quantity": 1,
+          "unfulfilledQuantity": 1
+        }
+      }
+    ]
+  },
+
+  "fulfillmentOrders": {
+    "edges": [
+      {
+        "node": {
+          "id": "gid://shopify/FulfillmentOrder/555666777",
+          "status": "OPEN",
+          "assignedLocation": {
+            "name": "Retail Store - Alamagordo",
+            "location": {
+              "id": "gid://shopify/Location/987654321"
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+
