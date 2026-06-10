@@ -75,6 +75,7 @@ A product cannot sync to NetSuite unless it has a valid NetSuite ID. The OMS nee
 - `PRODUCT_ID`  
 - `INTERNAL_NAME`  
 - `PRODUCT_TYPE_ID`  
+- `NETSUITE_ID` (or similar field; may be `NULL` or empty if missing)
 
 ```sql
 SELECT p.product_id,
@@ -259,7 +260,7 @@ JOIN shipment s
 	ON s.primary_order_id = oh.order_id
 
 WHERE oh.sales_channel_enum_id ='WEB_SALES_CHANNEL'
-      AND s.shipment_method_type_id ='STOREPICKUP';
+      AND s.shipment_method_type_id ='STOREPICKUP'
       AND oh.order_date >= '2025-01-01 00:00:00' AND oh.order_date <='2025-12-01 00:00:00';
 ```
 
