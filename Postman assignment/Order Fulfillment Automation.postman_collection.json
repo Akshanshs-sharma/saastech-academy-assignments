@@ -1,0 +1,162 @@
+{
+	"info": {
+		"_postman_id": "9b0266db-d1e3-45ee-aa97-5c403ec513b6",
+		"name": "Order Fulfillment Automation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "55395959",
+		"_collection_link": "https://akshansh001-6080306.postman.co/workspace/Akshansh-Sharma's-Workspace~ccfeee97-9930-4d7f-8d30-08001ffb6f12/collection/55395959-9b0266db-d1e3-45ee-aa97-5c403ec513b6?action=share&source=collection_link&creator=55395959"
+	},
+	"item": [
+		{
+			"name": "PIck",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json();",
+							"pm.environment.set(\"shipment_id\", res.shipmentIds[0]);",
+							"",
+							"// If successful, go to Pack",
+							"if (pm.response.code === 200) {",
+							"    pm.execution.setNextRequest(\"Pack\");",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"packageName\": \"A\",\n    \"facilityId\": \"{{facility_id}}\",\n    \"shipmentMethodTypeId\": \"SECOND_DAY\",\n    \"statusId\": \"PICKLIST_ASSIGNED\",\n    \"pickers\": [\n        {\n            \"partyId\": \"10054\",\n            \"roleTypeId\": \"WAREHOUSE_PICKER\"\n        }\n    ],\n    \"orderItems\": [\n        {\n            \"orderId\": \"{{order_id}}\",\n            \"orderItemSeqId\": \"00102\",\n            \"shipGroupSeqId\": \"00005\",\n            \"productId\": \"M103288\",\n            \"quantity\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{base_url}}/rest/s1/poorti/createOrderFulfillmentWave",
+					"protocol": "https",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"rest",
+						"s1",
+						"poorti",
+						"createOrderFulfillmentWave"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pack",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// If successful, go to Ship",
+							"if (pm.response.code === 200) {",
+							"    pm.execution.setNextRequest(\"Ship\");",
+							"} else {",
+							"    pm.execution.setNextRequest(null);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"shipmentId\": \"{{shipment_id}}\",\n    \"orderId\": \"{{order_id}}\",\n    \"facilityId\": \"{{facility_id}}\",\n    \"rejectedOrderItems\": [],\n    \"shipmentPackageContents\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{base_url}}/rest/s1/poorti/shipments/{{shipment_id}}/pack",
+					"protocol": "https",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"rest",
+						"s1",
+						"poorti",
+						"shipments",
+						"{{shipment_id}}",
+						"pack"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ship",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"shipmentId\": \"{{shipment_id}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{base_url}}/rest/s1/poorti/shipments/{{shipment_id}}/ship",
+					"protocol": "https",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"rest",
+						"s1",
+						"poorti",
+						"shipments",
+						"{{shipment_id}}",
+						"ship"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
