@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main">
+        <section>
+            <actions><set field="headerItem" value="main"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <label style="h1" text="Welcome to Order Management System"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- OrderHeader -->
+    <screen name="FindOrderHeader">
+        <section>
+            <actions><set field="headerItem" value="OrderHeader"/><set field="titleProperty" value="Find Order"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <container style="button-bar"><link target="EditOrderHeader" text="Create New Order" style="buttontext create"/></container>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                            <decorator-section name="search-options"><include-form name="FindOrderHeader" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                            <decorator-section name="search-results"><include-form name="ListOrderHeaders" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                        </decorator-screen>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="EditOrderHeader">
+        <section>
+            <actions><set field="headerItem" value="OrderHeader"/><set field="orderId" from-field="parameters.orderId"/><entity-one entity-name="OmsOrderHeader" value-field="orderHeader"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body"><screenlet title="Edit Order"><include-form name="EditOrderHeader" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></screenlet></decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- OrderItem -->
+    <screen name="FindOrderItem">
+        <section>
+            <actions><set field="headerItem" value="OrderItem"/><set field="titleProperty" value="Find Order Item"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <container style="button-bar"><link target="EditOrderItem" text="Create New Order Item" style="buttontext create"/></container>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                            <decorator-section name="search-options"><include-form name="FindOrderItem" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                            <decorator-section name="search-results"><include-form name="ListOrderItems" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                        </decorator-screen>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="EditOrderItem">
+        <section>
+            <actions><set field="headerItem" value="OrderItem"/><entity-one entity-name="OmsOrderItem" value-field="orderItem"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body"><screenlet title="Edit Order Item"><include-form name="EditOrderItem" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></screenlet></decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- OrderRole -->
+    <screen name="FindOrderRole">
+        <section>
+            <actions><set field="headerItem" value="OrderRole"/><set field="titleProperty" value="Find Order Role"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <container style="button-bar"><link target="EditOrderRole" text="Create New Order Role" style="buttontext create"/></container>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                            <decorator-section name="search-options"><include-form name="FindOrderRole" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                            <decorator-section name="search-results"><include-form name="ListOrderRoles" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                        </decorator-screen>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="EditOrderRole">
+        <section>
+            <actions><set field="headerItem" value="OrderRole"/><entity-one entity-name="OmsOrderRole" value-field="orderRole"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body"><screenlet title="Edit Order Role"><include-form name="EditOrderRole" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></screenlet></decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- OrderContactMech -->
+    <screen name="FindOrderContactMech">
+        <section>
+            <actions><set field="headerItem" value="OrderContactMech"/><set field="titleProperty" value="Find Order Contact Mech"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <container style="button-bar"><link target="EditOrderContactMech" text="Create New Order Contact Mech" style="buttontext create"/></container>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                            <decorator-section name="search-options"><include-form name="FindOrderContactMech" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                            <decorator-section name="search-results"><include-form name="ListOrderContactMechs" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                        </decorator-screen>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="EditOrderContactMech">
+        <section>
+            <actions><set field="headerItem" value="OrderContactMech"/><entity-one entity-name="OmsOrderContactMech" value-field="orderContactMech"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body"><screenlet title="Edit Order Contact Mech"><include-form name="EditOrderContactMech" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></screenlet></decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- OrderStatus -->
+    <screen name="FindOrderStatus">
+        <section>
+            <actions><set field="headerItem" value="OrderStatus"/><set field="titleProperty" value="Find Order Status"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <container style="button-bar"><link target="EditOrderStatus" text="Create New Order Status" style="buttontext create"/></container>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                            <decorator-section name="search-options"><include-form name="FindOrderStatus" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                            <decorator-section name="search-results"><include-form name="ListOrderStatuses" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                        </decorator-screen>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="EditOrderStatus">
+        <section>
+            <actions><set field="headerItem" value="OrderStatus"/><set field="orderStatusId" from-field="parameters.orderStatusId"/><entity-one entity-name="OmsOrderStatus" value-field="orderStatus"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body"><screenlet title="Edit Order Status"><include-form name="EditOrderStatus" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></screenlet></decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- OrderAdjustment -->
+    <screen name="FindOrderAdjustment">
+        <section>
+            <actions><set field="headerItem" value="OrderAdjustment"/><set field="titleProperty" value="Find Order Adjustment"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <container style="button-bar"><link target="EditOrderAdjustment" text="Create New Adjustment" style="buttontext create"/></container>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                            <decorator-section name="search-options"><include-form name="FindOrderAdjustment" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                            <decorator-section name="search-results"><include-form name="ListOrderAdjustments" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                        </decorator-screen>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="EditOrderAdjustment">
+        <section>
+            <actions><set field="headerItem" value="OrderAdjustment"/><set field="orderAdjustmentId" from-field="parameters.orderAdjustmentId"/><entity-one entity-name="OmsOrderAdjustment" value-field="orderAdjustment"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body"><screenlet title="Edit Order Adjustment"><include-form name="EditOrderAdjustment" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></screenlet></decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- OrderPaymentPreference -->
+    <screen name="FindOrderPaymentPreference">
+        <section>
+            <actions><set field="headerItem" value="OrderPaymentPreference"/><set field="titleProperty" value="Find Order Payment"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <container style="button-bar"><link target="EditOrderPaymentPreference" text="Create New Payment" style="buttontext create"/></container>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                            <decorator-section name="search-options"><include-form name="FindOrderPaymentPreference" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                            <decorator-section name="search-results"><include-form name="ListOrderPaymentPreferences" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></decorator-section>
+                        </decorator-screen>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="EditOrderPaymentPreference">
+        <section>
+            <actions><set field="headerItem" value="OrderPaymentPreference"/><set field="orderPaymentPreferenceId" from-field="parameters.orderPaymentPreferenceId"/><entity-one entity-name="OmsOrderPaymentPreference" value-field="orderPaymentPreference"/></actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body"><screenlet title="Edit Order Payment"><include-form name="EditOrderPaymentPreference" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/></screenlet></decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+</screens>

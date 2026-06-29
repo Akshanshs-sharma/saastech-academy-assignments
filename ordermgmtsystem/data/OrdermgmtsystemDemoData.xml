@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+    <!-- Mock entities for foreign keys in custom plugins to ensure data loads cleanly -->
+    <PimProduct productId="GZ-2644" productName="Demo Laptop" isVirtual="N"/>
+    <PimProduct productId="GZ-2002" productName="Demo Mouse" isVirtual="N"/>
+
+    <RmPartyType partyTypeId="PERSON" description="Person"/>
+    <RmParty partyId="DEMO_CUST_1" partyTypeId="PERSON"/>
+    <RmPerson partyId="DEMO_CUST_1" firstName="Jane" lastName="Doe" birthDate="1990-01-01"/>
+    
+    <RmRoleType roleTypeId="CUSTOMER" description="Customer"/>
+    <RmRoleType roleTypeId="BILL_TO_CUSTOMER" description="Bill To Customer"/>
+    <RmRoleType roleTypeId="SHIP_TO_CUSTOMER" description="Ship To Customer"/>
+
+    <RmContactMechType contactMechTypeId="POSTAL_ADDRESS" description="Postal Address"/>
+    <RmContactMech contactMechId="DEMO_ADDR_1" contactMechTypeId="POSTAL_ADDRESS"/>
+    <RmPostalAddress contactMechId="DEMO_ADDR_1" address1="123 Shopping St" city="Commerce City" postalCode="12345"/>
+    
+    <RmContactMechPurposeType contactMechPurposeTypeId="SHIPPING_LOCATION" description="Shipping Location"/>
+
+    <!-- OmsOrderHeader Demo Data -->
+    <OmsOrderHeader orderId="DEMO_ORDER_1" orderTypeId="SALES_ORDER" orderName="Online Shopping Order" entryDate="2024-01-01 10:00:00.000" orderDate="2024-01-01 10:00:00.000" statusId="ORDER_APPROVED" currencyUomId="USD" createdBy="admin" grandTotal="1250.00"/>
+
+    <!-- OmsOrderItem Demo Data -->
+    <OmsOrderItem orderId="DEMO_ORDER_1" orderItemSeqId="00001" orderItemTypeId="PRODUCT_ORDER_ITEM" productId="GZ-2644" quantity="1" unitPrice="1200.00" statusId="ITEM_APPROVED"/>
+    <OmsOrderItem orderId="DEMO_ORDER_1" orderItemSeqId="00002" orderItemTypeId="PRODUCT_ORDER_ITEM" productId="GZ-2002" quantity="1" unitPrice="50.00" statusId="ITEM_APPROVED"/>
+
+    <!-- OmsOrderRole Demo Data -->
+    <OmsOrderRole orderId="DEMO_ORDER_1" partyId="DEMO_CUST_1" roleTypeId="CUSTOMER"/>
+    <OmsOrderRole orderId="DEMO_ORDER_1" partyId="DEMO_CUST_1" roleTypeId="BILL_TO_CUSTOMER"/>
+    <OmsOrderRole orderId="DEMO_ORDER_1" partyId="DEMO_CUST_1" roleTypeId="SHIP_TO_CUSTOMER"/>
+
+    <!-- OmsOrderContactMech Demo Data -->
+    <OmsOrderContactMech orderId="DEMO_ORDER_1" contactMechId="DEMO_ADDR_1" contactMechPurposeTypeId="SHIPPING_LOCATION"/>
+
+    <!-- OmsOrderStatus Demo Data -->
+    <OmsOrderStatus orderStatusId="DEMO_OS_1" statusId="ORDER_CREATED" orderId="DEMO_ORDER_1" statusDatetime="2024-01-01 10:00:00.000" statusUserLogin="admin" changeReason="Initial Order Creation"/>
+    <OmsOrderStatus orderStatusId="DEMO_OS_2" statusId="ORDER_APPROVED" orderId="DEMO_ORDER_1" statusDatetime="2024-01-01 10:05:00.000" statusUserLogin="admin" changeReason="Payment Verified"/>
+
+    <!-- OmsOrderAdjustment Demo Data -->
+    <OmsOrderAdjustment orderAdjustmentId="DEMO_ADJ_1" orderAdjustmentTypeId="SHIPPING_CHARGES" orderId="DEMO_ORDER_1" amount="20.00"/>
+    <OmsOrderAdjustment orderAdjustmentId="DEMO_ADJ_2" orderAdjustmentTypeId="PROMO_ADJUSTMENT" orderId="DEMO_ORDER_1" amount="-20.00"/>
+
+    <!-- OmsOrderPaymentPreference Demo Data -->
+    <OmsOrderPaymentPreference orderPaymentPreferenceId="DEMO_PAY_1" orderId="DEMO_ORDER_1" paymentMethodTypeId="CREDIT_CARD" maxAmount="1250.00" statusId="PAYMENT_AUTHORIZED"/>
+
+</entity-engine-xml>

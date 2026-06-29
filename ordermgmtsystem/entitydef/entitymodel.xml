@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <title>Entity of Ordermgmtsystem Component</title>
+    <description>Order Management System Entities</description>
+
+    <!-- Type and Status Entities -->
+    <entity entity-name="OmsOrderType" package-name="org.apache.ofbiz.ordermgmtsystem" title="Order Type">
+        <field name="orderTypeId" type="id"><description>Primary Key</description></field>
+        <field name="parentTypeId" type="id"></field>
+        <field name="description" type="description"></field>
+        <prim-key field="orderTypeId"/>
+        <relation type="one" fk-name="OMS_ORDTYP_PAR" title="Parent" rel-entity-name="OmsOrderType">
+            <key-map field-name="parentTypeId" rel-field-name="orderTypeId"/>
+        </relation>
+    </entity>
+    
+    <entity entity-name="OmsOrderItemType" package-name="org.apache.ofbiz.ordermgmtsystem" title="Order Item Type">
+        <field name="orderItemTypeId" type="id"><description>Primary Key</description></field>
+        <field name="parentTypeId" type="id"></field>
+        <field name="description" type="description"></field>
+        <prim-key field="orderItemTypeId"/>
+    </entity>
+
+    <entity entity-name="OmsOrderStatusType" package-name="org.apache.ofbiz.ordermgmtsystem" title="Order Status Type">
+        <field name="statusId" type="id"><description>Primary Key</description></field>
+        <field name="description" type="description"></field>
+        <prim-key field="statusId"/>
+    </entity>
+
+    <entity entity-name="OmsOrderStatus" package-name="org.apache.ofbiz.ordermgmtsystem" title="Order Status">
+        <field name="orderStatusId" type="id"><description>Primary Key</description></field>
+        <field name="statusId" type="id"></field>
+        <field name="orderId" type="id"></field>
+        <field name="orderPaymentPreferenceId" type="id"></field>
+        <field name="orderItemSeqId" type="id"></field>
+        <field name="statusDatetime" type="date-time"></field>
+        <field name="statusUserLogin" type="id-vlong"></field>
+        <field name="changeReason" type="description"></field>
+        <prim-key field="orderStatusId"/>
+        <relation type="one" fk-name="OMS_ORDSTS_TYP" rel-entity-name="OmsOrderStatusType">
+            <key-map field-name="statusId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDSTS_HDR" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+    </entity>
+
+    <!-- Core Order Entities -->
+    <entity entity-name="OmsOrderHeader" package-name="org.apache.ofbiz.ordermgmtsystem" title="Order Header">
+        <field name="orderId" type="id"><description>Primary Key</description></field>
+        <field name="orderTypeId" type="id"></field>
+        <field name="orderName" type="name"></field>
+        <field name="entryDate" type="date-time"></field>
+        <field name="orderDate" type="date-time"></field>
+        <field name="statusId" type="id"></field>
+        <field name="currencyUomId" type="id"></field>
+        <field name="createdBy" type="id"></field>
+        <field name="grandTotal" type="currency-amount"></field>
+        <prim-key field="orderId"/>
+        <relation type="one" fk-name="OMS_ORDHDR_TYP" rel-entity-name="OmsOrderType">
+            <key-map field-name="orderTypeId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDHDR_STS" rel-entity-name="OmsOrderStatusType">
+            <key-map field-name="statusId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderItem" package-name="org.apache.ofbiz.ordermgmtsystem" title="Order Item">
+        <field name="orderId" type="id"></field>
+        <field name="orderItemSeqId" type="id"></field>
+        <field name="orderItemTypeId" type="id"></field>
+        <field name="productId" type="id"></field>
+        <field name="quantity" type="fixed-point"></field>
+        <field name="unitPrice" type="currency-amount"></field>
+        <field name="statusId" type="id"></field>
+        <prim-key field="orderId"/>
+        <prim-key field="orderItemSeqId"/>
+        <relation type="one" fk-name="OMS_ORDITM_HDR" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDITM_TYP" rel-entity-name="OmsOrderItemType">
+            <key-map field-name="orderItemTypeId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDITM_STS" rel-entity-name="OmsOrderStatusType">
+            <key-map field-name="statusId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDITM_PRD" rel-entity-name="Product">
+            <key-map field-name="productId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDITM_PIMPRD" title="Pim" rel-entity-name="PimProduct">
+            <key-map field-name="productId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderRole" package-name="org.apache.ofbiz.ordermgmtsystem" title="Order Role">
+        <field name="orderId" type="id"></field>
+        <field name="partyId" type="id"></field>
+        <field name="roleTypeId" type="id"></field>
+        <prim-key field="orderId"/>
+        <prim-key field="partyId"/>
+        <prim-key field="roleTypeId"/>
+        <relation type="one" fk-name="OMS_ORDRL_HDR" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDRL_PTY" rel-entity-name="RmParty">
+            <key-map field-name="partyId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDRL_RLT" rel-entity-name="RmRoleType">
+            <key-map field-name="roleTypeId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderContactMech" package-name="org.apache.ofbiz.ordermgmtsystem" title="Order Contact Mech">
+        <field name="orderId" type="id"></field>
+        <field name="contactMechId" type="id"></field>
+        <field name="contactMechPurposeTypeId" type="id"></field>
+        <prim-key field="orderId"/>
+        <prim-key field="contactMechId"/>
+        <!-- Purpose is not in PK because user said make it non-required -->
+        <relation type="one" fk-name="OMS_ORDCM_HDR" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDCM_CMECH" rel-entity-name="RmContactMech">
+            <key-map field-name="contactMechId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderAdjustmentType" package-name="org.apache.ofbiz.ordermgmtsystem" title="Order Adjustment Type">
+        <field name="orderAdjustmentTypeId" type="id"></field>
+        <field name="parentTypeId" type="id"></field>
+        <field name="description" type="description"></field>
+        <prim-key field="orderAdjustmentTypeId"/>
+    </entity>
+
+    <entity entity-name="OmsOrderAdjustment" package-name="org.apache.ofbiz.ordermgmtsystem" title="Order Adjustment">
+        <field name="orderAdjustmentId" type="id"></field>
+        <field name="orderAdjustmentTypeId" type="id"></field>
+        <field name="orderId" type="id"></field>
+        <field name="orderItemSeqId" type="id"></field>
+        <field name="amount" type="currency-amount"></field>
+        <prim-key field="orderAdjustmentId"/>
+        <relation type="one" fk-name="OMS_ORDADJ_TYP" rel-entity-name="OmsOrderAdjustmentType">
+            <key-map field-name="orderAdjustmentTypeId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDADJ_HDR" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDADJ_ITM" rel-entity-name="OmsOrderItem">
+            <key-map field-name="orderId"/>
+            <key-map field-name="orderItemSeqId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderItemAssocType" package-name="org.apache.ofbiz.ordermgmtsystem" title="Order Item Association Type">
+        <field name="orderItemAssocTypeId" type="id"></field>
+        <field name="description" type="description"></field>
+        <prim-key field="orderItemAssocTypeId"/>
+    </entity>
+
+    <entity entity-name="OmsOrderItemAssoc" package-name="org.apache.ofbiz.ordermgmtsystem" title="Order Item Association">
+        <field name="orderId" type="id"></field>
+        <field name="orderItemSeqId" type="id"></field>
+        <field name="toOrderId" type="id"></field>
+        <field name="toOrderItemSeqId" type="id"></field>
+        <field name="orderItemAssocTypeId" type="id"></field>
+        <prim-key field="orderId"/>
+        <prim-key field="orderItemSeqId"/>
+        <prim-key field="toOrderId"/>
+        <prim-key field="toOrderItemSeqId"/>
+        <relation type="one" fk-name="OMS_ORDASSOC_TYP" rel-entity-name="OmsOrderItemAssocType">
+            <key-map field-name="orderItemAssocTypeId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDASSOC_FM" title="From" rel-entity-name="OmsOrderItem">
+            <key-map field-name="orderId"/>
+            <key-map field-name="orderItemSeqId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDASSOC_TO" title="To" rel-entity-name="OmsOrderItem">
+            <key-map field-name="toOrderId" rel-field-name="orderId"/>
+            <key-map field-name="toOrderItemSeqId" rel-field-name="orderItemSeqId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderPaymentPreference" package-name="org.apache.ofbiz.ordermgmtsystem" title="Order Payment Preference">
+        <field name="orderPaymentPreferenceId" type="id"></field>
+        <field name="orderId" type="id"></field>
+        <field name="productPricePurposeId" type="id"></field>
+        <field name="paymentMethodTypeId" type="id"></field>
+        <field name="track2" type="long-varchar"></field>
+        <field name="securityCode" type="short-varchar"></field>
+        <field name="paymentMethodId" type="id"></field>
+        <field name="orderItemSeqId" type="id"></field>
+        <field name="finAccountId" type="id"></field>
+        <field name="shipGroupSeqId" type="id"></field>
+        <field name="presentFlag" type="indicator"></field>
+        <field name="overflowFlag" type="indicator"></field>
+        <field name="swappedFlag" type="indicator"></field>
+        <field name="maxAmount" type="currency-amount"></field>
+        <field name="processAttempt" type="numeric"></field>
+        <field name="billingPostalCode" type="short-varchar"></field>
+        <field name="manualAuthCode" type="short-varchar"></field>
+        <field name="manualRefNum" type="short-varchar"></field>
+        <field name="statusId" type="id"></field>
+        <field name="needsNsfRetry" type="indicator"></field>
+        <field name="lastModifiedDate" type="date-time"></field>
+        <field name="lastModifiedByUserLogin" type="id-vlong"></field>
+        <field name="createdDate" type="date-time"></field>
+        <field name="createdByUserLogin" type="id-vlong"></field>
+        <prim-key field="orderPaymentPreferenceId"/>
+        <relation type="one" fk-name="OMS_ORDPAY_HDR" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_ORDPAY_STS" rel-entity-name="OmsOrderStatusType">
+            <key-map field-name="statusId"/>
+        </relation>
+    </entity>
+</entitymodel>

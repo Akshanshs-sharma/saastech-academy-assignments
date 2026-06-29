@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+    <!-- Order Types -->
+    <OmsOrderType orderTypeId="SALES_ORDER" description="Sales Order"/>
+    <OmsOrderType orderTypeId="PURCHASE_ORDER" description="Purchase Order"/>
+
+    <!-- Order Item Types -->
+    <OmsOrderItemType orderItemTypeId="PRODUCT_ORDER_ITEM" description="Product Order Item"/>
+    <OmsOrderItemType orderItemTypeId="RENTAL_ORDER_ITEM" description="Rental Order Item"/>
+    
+    <!-- Order Status Types -->
+    <OmsOrderStatusType statusId="ORDER_CREATED" description="Created"/>
+    <OmsOrderStatusType statusId="ORDER_APPROVED" description="Approved"/>
+    <OmsOrderStatusType statusId="ORDER_COMPLETED" description="Completed"/>
+    <OmsOrderStatusType statusId="ORDER_CANCELLED" description="Cancelled"/>
+
+    <OmsOrderStatusType statusId="ITEM_CREATED" description="Item Created"/>
+    <OmsOrderStatusType statusId="ITEM_APPROVED" description="Item Approved"/>
+    <OmsOrderStatusType statusId="ITEM_COMPLETED" description="Item Completed"/>
+    <OmsOrderStatusType statusId="ITEM_CANCELLED" description="Item Cancelled"/>
+
+    <OmsOrderStatusType statusId="PAYMENT_NOT_AUTH" description="Not Authorized"/>
+    <OmsOrderStatusType statusId="PAYMENT_AUTHORIZED" description="Authorized"/>
+    <OmsOrderStatusType statusId="PAYMENT_SETTLED" description="Settled"/>
+
+    <!-- Order Adjustment Types -->
+    <OmsOrderAdjustmentType orderAdjustmentTypeId="PROMO_ADJUSTMENT" description="Promotion Discount"/>
+    <OmsOrderAdjustmentType orderAdjustmentTypeId="SHIPPING_CHARGES" description="Shipping Charges"/>
+    <OmsOrderAdjustmentType orderAdjustmentTypeId="SALES_TAX" description="Sales Tax"/>
+
+    <!-- Order Item Association Types -->
+    <OmsOrderItemAssocType orderItemAssocTypeId="REPLACEMENT" description="Replacement"/>
+    <OmsOrderItemAssocType orderItemAssocTypeId="CROSS_SELL" description="Cross-Sell"/>
+    <OmsOrderItemAssocType orderItemAssocTypeId="UP_SELL" description="Up-Sell"/>
+
+</entity-engine-xml>

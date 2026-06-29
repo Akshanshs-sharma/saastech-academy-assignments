@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ofbiz.apache.org/Widget-Menu" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Menu http://ofbiz.apache.org/dtds/widget-menu.xsd">
+    <menu name="MainAppBar" title="${uiLabelMap.OrdermgmtsystemApplication}" extends="CommonAppBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="main" title="Main"><link target="main"/></menu-item>
+        <menu-item name="OrderHeader" title="Orders"><link target="FindOrderHeader"/></menu-item>
+        <menu-item name="OrderItem" title="Order Items"><link target="FindOrderItem"/></menu-item>
+        <menu-item name="OrderRole" title="Order Roles"><link target="FindOrderRole"/></menu-item>
+        <menu-item name="OrderContactMech" title="Order Contact Mechs"><link target="FindOrderContactMech"/></menu-item>
+        <menu-item name="OrderStatus" title="Order Status"><link target="FindOrderStatus"/></menu-item>
+        <menu-item name="OrderAdjustment" title="Order Adjustments"><link target="FindOrderAdjustment"/></menu-item>
+        <menu-item name="OrderPaymentPreference" title="Order Payments"><link target="FindOrderPaymentPreference"/></menu-item>
+    </menu>
+</menus>
