@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entity-engine-xml>
+    <!-- Products -->
+    <PimProduct productId="PROD10000" internalName="Smartphone" productName="Smartphone" productTypeId="FINISHED_GOOD" isVirtual="Y" isVariant="N"/>
+    <PimProduct productId="PROD10001" internalName="Smartphone-128GB" productName="Smartphone-128GB" productTypeId="FINISHED_GOOD" isVirtual="N" isVariant="Y"/>
+    <PimProduct productId="PROD10002" internalName="Smartphone-256GB" productName="Smartphone-256GB" productTypeId="FINISHED_GOOD" isVirtual="N" isVariant="Y"/>
+    <PimProduct productId="PROD20000" internalName="Laptop" productName="Laptop" productTypeId="FINISHED_GOOD" isVirtual="Y" isVariant="N" introductionDate="2023-09-01 00:00:00"/>
+    <PimProduct productId="PROD20001" internalName="Laptop-BLACK" productName="Laptop-BLACK" productTypeId="FINISHED_GOOD" isVirtual="N" isVariant="Y"/>
+    <PimProduct productId="PROM001" internalName="Laptop-Phone-Promotional-Package" productName="Laptop-Phone-Promotional-Package" productTypeId="MARKETING_PKG_AUTO" isVirtual="Y" isVariant="N"/>
+
+    <!-- Product Prices -->
+    <PimProductPrice productId="PROD10001" productPriceTypeId="LIST_PRICE" currencyUomId="USD" fromDate="2023-01-01 00:00:00" price="799.99"/>
+    <PimProductPrice productId="PROD10002" productPriceTypeId="LIST_PRICE" currencyUomId="USD" fromDate="2023-01-01 00:00:00" price="1099.99"/>
+    <PimProductPrice productId="PROD10002" productPriceTypeId="PROMO_PRICE" currencyUomId="USD" fromDate="2023-01-01 00:00:00" price="999.99"/>
+    <PimProductPrice productId="PROD20000" productPriceTypeId="LIST_PRICE" currencyUomId="USD" fromDate="2023-01-01 00:00:00" price="1299.99"/>
+    <PimProductPrice productId="PROM001" productPriceTypeId="PROMO_PRICE" currencyUomId="USD" fromDate="2023-01-01 00:00:00" price="1999.99"/>
+
+    <!-- Good Identifications -->
+    <PimGoodIdentification productId="PROD10000" goodIdentificationTypeId="SKU" idValue="SKU-PROD10000"/>
+    <PimGoodIdentification productId="PROD10001" goodIdentificationTypeId="SKU" idValue="SKU-PROD10001"/>
+
+    <!-- Product Assoc -->
+    <PimProductAssoc productId="PROD10000" productIdTo="PROD10001" productAssocTypeId="PRODUCT_VARIANT" fromDate="2023-01-01 00:00:00"/>
+    <PimProductAssoc productId="PROD10000" productIdTo="PROD10002" productAssocTypeId="PRODUCT_VARIANT" fromDate="2023-01-01 00:00:00"/>
+    <PimProductAssoc productId="PROD20000" productIdTo="PROD20001" productAssocTypeId="PRODUCT_VARIANT" fromDate="2023-09-01 00:00:00"/>
+    
+    <PimProductAssoc productId="PROM001" productIdTo="PROD10001" productAssocTypeId="PRODUCT_COMPONENT" fromDate="2023-10-01 00:00:00"/>
+    <PimProductAssoc productId="PROM001" productIdTo="PROD20001" productAssocTypeId="PRODUCT_COMPONENT" fromDate="2023-10-01 00:00:00"/>
+
+    <!-- Product Features -->
+    <PimProductFeature productFeatureId="COLOR_BLACK" productFeatureTypeId="COLOR" description="Black"/>
+    <PimProductFeature productFeatureId="STOR_128GB" productFeatureTypeId="SIZE" description="128GB Storage"/>
+    <PimProductFeature productFeatureId="STOR_256GB" productFeatureTypeId="SIZE" description="256GB Storage"/>
+
+    <!-- Product Feature Application -->
+    <PimProductFeatureAppl productId="PROD10001" productFeatureId="STOR_128GB" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2023-01-01 00:00:00"/>
+    <PimProductFeatureAppl productId="PROD10002" productFeatureId="STOR_256GB" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2023-01-01 00:00:00"/>
+    <PimProductFeatureAppl productId="PROD20001" productFeatureId="COLOR_BLACK" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2023-09-01 00:00:00"/>
+
+    <!-- Product Categories -->
+    <PimProductCategory productCategoryId="PCAT_ELEC" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Electronics" description="Electronic Devices"/>
+    <PimProductCategory productCategoryId="PCAT_PHONE" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Smartphones" description="Smartphones"/>
+    <PimProductCategory productCategoryId="PCAT_LAPTOP" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Laptops" description="Laptops"/>
+
+    <!-- Product Category Rollup -->
+    <PimProductCategoryRollup productCategoryId="PCAT_PHONE" parentProductCategoryId="PCAT_ELEC" fromDate="2023-01-01 00:00:00"/>
+    <PimProductCategoryRollup productCategoryId="PCAT_LAPTOP" parentProductCategoryId="PCAT_ELEC" fromDate="2023-01-01 00:00:00"/>
+
+    <!-- Product Category Member -->
+    <PimProductCategoryMember productCategoryId="PCAT_PHONE" productId="PROD10000" fromDate="2023-01-01 00:00:00"/>
+    <PimProductCategoryMember productCategoryId="PCAT_LAPTOP" productId="PROD20000" fromDate="2023-01-01 00:00:00"/>
+</entity-engine-xml>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Widget-Form" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Form http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+    <form name="FindProduct" type="single" target="FindProduct" default-entity-name="PimProduct">
+        <auto-fields-entity entity-name="PimProduct" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="submitButton" title="Find"><submit button-type="button"/></field>
+    </form>
+    <form name="ListProducts" type="list" list-name="listIt" target="UpdateProduct" default-entity-name="PimProduct">
+        <actions>
+            <set field="entityName" value="PimProduct"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" from-field="entityName"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="PimProduct" default-field-type="display"/>
+        <field name="productId" widget-style="buttontext">
+            <hyperlink description="${productId}" target="EditProduct">
+                <parameter param-name="productId"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deletePimProduct" also-hidden="false">
+                <parameter param-name="productId"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditProduct" type="single" target="createPimProduct" default-entity-name="PimProduct">
+        <alt-target use-when="product!=null" target="updatePimProduct"/>
+        <actions>
+            <entity-one entity-name="PimProduct" value-field="product"/>
+        </actions>
+        <auto-fields-entity entity-name="PimProduct" default-field-type="edit"/>
+        <field name="productId" use-when="product!=null"><display/></field>
+        <field name="productId" use-when="product==null"><text/></field>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindProductFeature" type="single" target="FindProductFeature" default-entity-name="PimProductFeature">
+        <auto-fields-entity entity-name="PimProductFeature" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="submitButton" title="Find"><submit button-type="button"/></field>
+    </form>
+    <form name="ListProductFeatures" type="list" list-name="listIt" target="UpdateProductFeature" default-entity-name="PimProductFeature">
+        <actions>
+            <set field="entityName" value="PimProductFeature"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" from-field="entityName"/>
+            </service>
+        </actions>
+        <field name="productFeatureId" widget-style="buttontext">
+            <hyperlink description="${productFeatureId}" target="EditProductFeature">
+                <parameter param-name="productFeatureId"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deletePimProductFeature" also-hidden="false">
+                <parameter param-name="productFeatureId"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditProductFeature" type="single" target="createPimProductFeature" default-entity-name="PimProductFeature">
+        <alt-target use-when="productFeature!=null" target="updatePimProductFeature"/>
+        <actions>
+            <entity-one entity-name="PimProductFeature" value-field="productFeature"/>
+        </actions>
+        <auto-fields-entity entity-name="PimProductFeature" default-field-type="edit"/>
+        <field name="productFeatureId" use-when="productFeature!=null"><display/></field>
+        <field name="productFeatureId" use-when="productFeature==null"><text/></field>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindProductCategory" type="single" target="FindProductCategory" default-entity-name="PimProductCategory">
+        <auto-fields-entity entity-name="PimProductCategory" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="submitButton" title="Find"><submit button-type="button"/></field>
+    </form>
+    <form name="ListProductCategories" type="list" list-name="listIt" target="UpdateProductCategory" default-entity-name="PimProductCategory">
+        <actions>
+            <set field="entityName" value="PimProductCategory"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" from-field="entityName"/>
+            </service>
+        </actions>
+        <field name="productCategoryId" widget-style="buttontext">
+            <hyperlink description="${productCategoryId}" target="EditProductCategory">
+                <parameter param-name="productCategoryId"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deletePimProductCategory" also-hidden="false">
+                <parameter param-name="productCategoryId"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditProductCategory" type="single" target="createPimProductCategory" default-entity-name="PimProductCategory">
+        <alt-target use-when="productCategory!=null" target="updatePimProductCategory"/>
+        <actions>
+            <entity-one entity-name="PimProductCategory" value-field="productCategory"/>
+        </actions>
+        <auto-fields-entity entity-name="PimProductCategory" default-field-type="edit"/>
+        <field name="productCategoryId" use-when="productCategory!=null"><display/></field>
+        <field name="productCategoryId" use-when="productCategory==null"><text/></field>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindPimProductPrice" type="single" target="FindPimProductPrice" default-entity-name="PimProductPrice">
+        <auto-fields-entity entity-name="PimProductPrice" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="submitButton" title="Find"><submit button-type="button"/></field>
+    </form>
+    <form name="ListPimProductPrices" type="list" list-name="listIt" target="UpdatePimProductPrice" default-entity-name="PimProductPrice">
+        <actions>
+            <set field="entityName" value="PimProductPrice"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" from-field="entityName"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="PimProductPrice" default-field-type="display"/>
+        <field name="editLink" title=" " widget-style="buttontext">
+            <hyperlink description="Edit" target="EditPimProductPrice" also-hidden="false">
+                <auto-parameters-entity entity-name="PimProductPrice"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deletePimProductPrice" also-hidden="false">
+                <auto-parameters-entity entity-name="PimProductPrice"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditPimProductPrice" type="single" target="createPimProductPrice" default-entity-name="PimProductPrice">
+        <alt-target use-when="pimProductPrice!=null" target="updatePimProductPrice"/>
+        <actions>
+            <entity-one entity-name="PimProductPrice" value-field="pimProductPrice"/>
+        </actions>
+        <auto-fields-entity entity-name="PimProductPrice" default-field-type="edit"/>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindPimProductFeatureAppl" type="single" target="FindPimProductFeatureAppl" default-entity-name="PimProductFeatureAppl">
+        <auto-fields-entity entity-name="PimProductFeatureAppl" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="submitButton" title="Find"><submit button-type="button"/></field>
+    </form>
+    <form name="ListPimProductFeatureAppls" type="list" list-name="listIt" target="UpdatePimProductFeatureAppl" default-entity-name="PimProductFeatureAppl">
+        <actions>
+            <set field="entityName" value="PimProductFeatureAppl"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" from-field="entityName"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="PimProductFeatureAppl" default-field-type="display"/>
+        <field name="editLink" title=" " widget-style="buttontext">
+            <hyperlink description="Edit" target="EditPimProductFeatureAppl" also-hidden="false">
+                <auto-parameters-entity entity-name="PimProductFeatureAppl"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deletePimProductFeatureAppl" also-hidden="false">
+                <auto-parameters-entity entity-name="PimProductFeatureAppl"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditPimProductFeatureAppl" type="single" target="createPimProductFeatureAppl" default-entity-name="PimProductFeatureAppl">
+        <alt-target use-when="pimProductFeatureAppl!=null" target="updatePimProductFeatureAppl"/>
+        <actions>
+            <entity-one entity-name="PimProductFeatureAppl" value-field="pimProductFeatureAppl"/>
+        </actions>
+        <auto-fields-entity entity-name="PimProductFeatureAppl" default-field-type="edit"/>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindPimProductAssoc" type="single" target="FindPimProductAssoc" default-entity-name="PimProductAssoc">
+        <auto-fields-entity entity-name="PimProductAssoc" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="submitButton" title="Find"><submit button-type="button"/></field>
+    </form>
+    <form name="ListPimProductAssocs" type="list" list-name="listIt" target="UpdatePimProductAssoc" default-entity-name="PimProductAssoc">
+        <actions>
+            <set field="entityName" value="PimProductAssoc"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" from-field="entityName"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="PimProductAssoc" default-field-type="display"/>
+        <field name="editLink" title=" " widget-style="buttontext">
+            <hyperlink description="Edit" target="EditPimProductAssoc" also-hidden="false">
+                <auto-parameters-entity entity-name="PimProductAssoc"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deletePimProductAssoc" also-hidden="false">
+                <auto-parameters-entity entity-name="PimProductAssoc"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditPimProductAssoc" type="single" target="createPimProductAssoc" default-entity-name="PimProductAssoc">
+        <alt-target use-when="pimProductAssoc!=null" target="updatePimProductAssoc"/>
+        <actions>
+            <entity-one entity-name="PimProductAssoc" value-field="pimProductAssoc"/>
+        </actions>
+        <auto-fields-entity entity-name="PimProductAssoc" default-field-type="edit"/>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindPimProductCategoryRollup" type="single" target="FindPimProductCategoryRollup" default-entity-name="PimProductCategoryRollup">
+        <auto-fields-entity entity-name="PimProductCategoryRollup" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="submitButton" title="Find"><submit button-type="button"/></field>
+    </form>
+    <form name="ListPimProductCategoryRollups" type="list" list-name="listIt" target="UpdatePimProductCategoryRollup" default-entity-name="PimProductCategoryRollup">
+        <actions>
+            <set field="entityName" value="PimProductCategoryRollup"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" from-field="entityName"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="PimProductCategoryRollup" default-field-type="display"/>
+        <field name="editLink" title=" " widget-style="buttontext">
+            <hyperlink description="Edit" target="EditPimProductCategoryRollup" also-hidden="false">
+                <auto-parameters-entity entity-name="PimProductCategoryRollup"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deletePimProductCategoryRollup" also-hidden="false">
+                <auto-parameters-entity entity-name="PimProductCategoryRollup"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditPimProductCategoryRollup" type="single" target="createPimProductCategoryRollup" default-entity-name="PimProductCategoryRollup">
+        <alt-target use-when="pimProductCategoryRollup!=null" target="updatePimProductCategoryRollup"/>
+        <actions>
+            <entity-one entity-name="PimProductCategoryRollup" value-field="pimProductCategoryRollup"/>
+        </actions>
+        <auto-fields-entity entity-name="PimProductCategoryRollup" default-field-type="edit"/>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindPimProductCategoryMember" type="single" target="FindPimProductCategoryMember" default-entity-name="PimProductCategoryMember">
+        <auto-fields-entity entity-name="PimProductCategoryMember" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="submitButton" title="Find"><submit button-type="button"/></field>
+    </form>
+    <form name="ListPimProductCategoryMembers" type="list" list-name="listIt" target="UpdatePimProductCategoryMember" default-entity-name="PimProductCategoryMember">
+        <actions>
+            <set field="entityName" value="PimProductCategoryMember"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" from-field="entityName"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="PimProductCategoryMember" default-field-type="display"/>
+        <field name="editLink" title=" " widget-style="buttontext">
+            <hyperlink description="Edit" target="EditPimProductCategoryMember" also-hidden="false">
+                <auto-parameters-entity entity-name="PimProductCategoryMember"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deletePimProductCategoryMember" also-hidden="false">
+                <auto-parameters-entity entity-name="PimProductCategoryMember"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditPimProductCategoryMember" type="single" target="createPimProductCategoryMember" default-entity-name="PimProductCategoryMember">
+        <alt-target use-when="pimProductCategoryMember!=null" target="updatePimProductCategoryMember"/>
+        <actions>
+            <entity-one entity-name="PimProductCategoryMember" value-field="pimProductCategoryMember"/>
+        </actions>
+        <auto-fields-entity entity-name="PimProductCategoryMember" default-field-type="edit"/>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindPimGoodIdentification" type="single" target="FindPimGoodIdentification" default-entity-name="PimGoodIdentification">
+        <auto-fields-entity entity-name="PimGoodIdentification" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="submitButton" title="Find"><submit button-type="button"/></field>
+    </form>
+    <form name="ListPimGoodIdentifications" type="list" list-name="listIt" target="UpdatePimGoodIdentification" default-entity-name="PimGoodIdentification">
+        <actions>
+            <set field="entityName" value="PimGoodIdentification"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" from-field="entityName"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="PimGoodIdentification" default-field-type="display"/>
+        <field name="editLink" title=" " widget-style="buttontext">
+            <hyperlink description="Edit" target="EditPimGoodIdentification" also-hidden="false">
+                <auto-parameters-entity entity-name="PimGoodIdentification"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deletePimGoodIdentification" also-hidden="false">
+                <auto-parameters-entity entity-name="PimGoodIdentification"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditPimGoodIdentification" type="single" target="createPimGoodIdentification" default-entity-name="PimGoodIdentification">
+        <alt-target use-when="pimGoodIdentification!=null" target="updatePimGoodIdentification"/>
+        <actions>
+            <entity-one entity-name="PimGoodIdentification" value-field="pimGoodIdentification"/>
+        </actions>
+        <auto-fields-entity entity-name="PimGoodIdentification" default-field-type="edit"/>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+</forms>

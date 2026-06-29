@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Site-Conf" xsi:schemaLocation="http://ofbiz.apache.org/Site-Conf http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
+
+    <description>Productinformationmgr Component Site Configuration File</description>
+
+    <!-- Events to run on every request before security (chains exempt) -->
+    <!--
+    <preprocessor>
+    </preprocessor>
+    -->
+    <!-- Events to run on every request after all other processing (chains exempt) -->
+    <!--
+    <postprocessor>
+        <event name="test" type="java" path="org.apache.ofbiz.webapp.event.TestEvent" invoke="test"/>
+    </postprocessor>
+    -->
+
+    <!-- Request Mappings -->
+    <request-map uri="main"><security https="true" auth="true"/><response name="success" type="view" value="main"/></request-map>
+
+    <request-map uri="FindProduct"><security https="true" auth="true"/><response name="success" type="view" value="FindProduct"/></request-map>
+    <request-map uri="EditProduct"><security https="true" auth="true"/><response name="success" type="view" value="EditProduct"/></request-map>
+    <request-map uri="createPimProduct">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createPimProduct"/>
+        <response name="success" type="view" value="FindProduct"/>
+        <response name="error" type="view" value="EditProduct"/>
+    </request-map>
+    <request-map uri="updatePimProduct">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePimProduct"/>
+        <response name="success" type="view" value="FindProduct"/>
+        <response name="error" type="view" value="EditProduct"/>
+    </request-map>
+    <request-map uri="deletePimProduct">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deletePimProduct"/>
+        <response name="success" type="view" value="FindProduct"/>
+        <response name="error" type="view" value="FindProduct"/>
+    </request-map>
+
+    <request-map uri="FindProductFeature"><security https="true" auth="true"/><response name="success" type="view" value="FindProductFeature"/></request-map>
+    <request-map uri="EditProductFeature"><security https="true" auth="true"/><response name="success" type="view" value="EditProductFeature"/></request-map>
+    <request-map uri="createPimProductFeature">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createPimProductFeature"/>
+        <response name="success" type="view" value="FindProductFeature"/>
+        <response name="error" type="view" value="EditProductFeature"/>
+    </request-map>
+    <request-map uri="updatePimProductFeature">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePimProductFeature"/>
+        <response name="success" type="view" value="FindProductFeature"/>
+        <response name="error" type="view" value="EditProductFeature"/>
+    </request-map>
+    <request-map uri="deletePimProductFeature">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deletePimProductFeature"/>
+        <response name="success" type="view" value="FindProductFeature"/>
+        <response name="error" type="view" value="FindProductFeature"/>
+    </request-map>
+
+    <request-map uri="FindProductCategory"><security https="true" auth="true"/><response name="success" type="view" value="FindProductCategory"/></request-map>
+    <request-map uri="EditProductCategory"><security https="true" auth="true"/><response name="success" type="view" value="EditProductCategory"/></request-map>
+    <request-map uri="createPimProductCategory">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createPimProductCategory"/>
+        <response name="success" type="view" value="FindProductCategory"/>
+        <response name="error" type="view" value="EditProductCategory"/>
+    </request-map>
+    <request-map uri="updatePimProductCategory">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePimProductCategory"/>
+        <response name="success" type="view" value="FindProductCategory"/>
+        <response name="error" type="view" value="EditProductCategory"/>
+    </request-map>
+    <request-map uri="deletePimProductCategory">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deletePimProductCategory"/>
+        <response name="success" type="view" value="FindProductCategory"/>
+        <response name="error" type="view" value="FindProductCategory"/>
+    </request-map>
+    
+    
+    <request-map uri="FindPimProductPrice"><security https="true" auth="true"/><response name="success" type="view" value="FindPimProductPrice"/></request-map>
+    <request-map uri="EditPimProductPrice"><security https="true" auth="true"/><response name="success" type="view" value="EditPimProductPrice"/></request-map>
+    <request-map uri="createPimProductPrice">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createPimProductPrice"/>
+        <response name="success" type="view" value="FindPimProductPrice"/>
+        <response name="error" type="view" value="EditPimProductPrice"/>
+    </request-map>
+    <request-map uri="updatePimProductPrice">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePimProductPrice"/>
+        <response name="success" type="view" value="FindPimProductPrice"/>
+        <response name="error" type="view" value="EditPimProductPrice"/>
+    </request-map>
+    <request-map uri="deletePimProductPrice">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deletePimProductPrice"/>
+        <response name="success" type="view" value="FindPimProductPrice"/>
+        <response name="error" type="view" value="FindPimProductPrice"/>
+    </request-map>
+
+    <request-map uri="FindPimProductFeatureAppl"><security https="true" auth="true"/><response name="success" type="view" value="FindPimProductFeatureAppl"/></request-map>
+    <request-map uri="EditPimProductFeatureAppl"><security https="true" auth="true"/><response name="success" type="view" value="EditPimProductFeatureAppl"/></request-map>
+    <request-map uri="createPimProductFeatureAppl">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createPimProductFeatureAppl"/>
+        <response name="success" type="view" value="FindPimProductFeatureAppl"/>
+        <response name="error" type="view" value="EditPimProductFeatureAppl"/>
+    </request-map>
+    <request-map uri="updatePimProductFeatureAppl">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePimProductFeatureAppl"/>
+        <response name="success" type="view" value="FindPimProductFeatureAppl"/>
+        <response name="error" type="view" value="EditPimProductFeatureAppl"/>
+    </request-map>
+    <request-map uri="deletePimProductFeatureAppl">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deletePimProductFeatureAppl"/>
+        <response name="success" type="view" value="FindPimProductFeatureAppl"/>
+        <response name="error" type="view" value="FindPimProductFeatureAppl"/>
+    </request-map>
+
+    <request-map uri="FindPimProductAssoc"><security https="true" auth="true"/><response name="success" type="view" value="FindPimProductAssoc"/></request-map>
+    <request-map uri="EditPimProductAssoc"><security https="true" auth="true"/><response name="success" type="view" value="EditPimProductAssoc"/></request-map>
+    <request-map uri="createPimProductAssoc">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createPimProductAssoc"/>
+        <response name="success" type="view" value="FindPimProductAssoc"/>
+        <response name="error" type="view" value="EditPimProductAssoc"/>
+    </request-map>
+    <request-map uri="updatePimProductAssoc">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePimProductAssoc"/>
+        <response name="success" type="view" value="FindPimProductAssoc"/>
+        <response name="error" type="view" value="EditPimProductAssoc"/>
+    </request-map>
+    <request-map uri="deletePimProductAssoc">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deletePimProductAssoc"/>
+        <response name="success" type="view" value="FindPimProductAssoc"/>
+        <response name="error" type="view" value="FindPimProductAssoc"/>
+    </request-map>
+
+    <request-map uri="FindPimProductCategoryRollup"><security https="true" auth="true"/><response name="success" type="view" value="FindPimProductCategoryRollup"/></request-map>
+    <request-map uri="EditPimProductCategoryRollup"><security https="true" auth="true"/><response name="success" type="view" value="EditPimProductCategoryRollup"/></request-map>
+    <request-map uri="createPimProductCategoryRollup">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createPimProductCategoryRollup"/>
+        <response name="success" type="view" value="FindPimProductCategoryRollup"/>
+        <response name="error" type="view" value="EditPimProductCategoryRollup"/>
+    </request-map>
+    <request-map uri="updatePimProductCategoryRollup">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePimProductCategoryRollup"/>
+        <response name="success" type="view" value="FindPimProductCategoryRollup"/>
+        <response name="error" type="view" value="EditPimProductCategoryRollup"/>
+    </request-map>
+    <request-map uri="deletePimProductCategoryRollup">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deletePimProductCategoryRollup"/>
+        <response name="success" type="view" value="FindPimProductCategoryRollup"/>
+        <response name="error" type="view" value="FindPimProductCategoryRollup"/>
+    </request-map>
+
+    <request-map uri="FindPimProductCategoryMember"><security https="true" auth="true"/><response name="success" type="view" value="FindPimProductCategoryMember"/></request-map>
+    <request-map uri="EditPimProductCategoryMember"><security https="true" auth="true"/><response name="success" type="view" value="EditPimProductCategoryMember"/></request-map>
+    <request-map uri="createPimProductCategoryMember">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createPimProductCategoryMember"/>
+        <response name="success" type="view" value="FindPimProductCategoryMember"/>
+        <response name="error" type="view" value="EditPimProductCategoryMember"/>
+    </request-map>
+    <request-map uri="updatePimProductCategoryMember">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePimProductCategoryMember"/>
+        <response name="success" type="view" value="FindPimProductCategoryMember"/>
+        <response name="error" type="view" value="EditPimProductCategoryMember"/>
+    </request-map>
+    <request-map uri="deletePimProductCategoryMember">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deletePimProductCategoryMember"/>
+        <response name="success" type="view" value="FindPimProductCategoryMember"/>
+        <response name="error" type="view" value="FindPimProductCategoryMember"/>
+    </request-map>
+
+    <request-map uri="FindPimGoodIdentification"><security https="true" auth="true"/><response name="success" type="view" value="FindPimGoodIdentification"/></request-map>
+    <request-map uri="EditPimGoodIdentification"><security https="true" auth="true"/><response name="success" type="view" value="EditPimGoodIdentification"/></request-map>
+    <request-map uri="createPimGoodIdentification">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createPimGoodIdentification"/>
+        <response name="success" type="view" value="FindPimGoodIdentification"/>
+        <response name="error" type="view" value="EditPimGoodIdentification"/>
+    </request-map>
+    <request-map uri="updatePimGoodIdentification">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePimGoodIdentification"/>
+        <response name="success" type="view" value="FindPimGoodIdentification"/>
+        <response name="error" type="view" value="EditPimGoodIdentification"/>
+    </request-map>
+    <request-map uri="deletePimGoodIdentification">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deletePimGoodIdentification"/>
+        <response name="success" type="view" value="FindPimGoodIdentification"/>
+        <response name="error" type="view" value="FindPimGoodIdentification"/>
+    </request-map>
+
+    <!-- View Mappings -->
+<!-- View Mappings -->
+    <view-map name="main" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#main"/>
+    <view-map name="FindProduct" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#FindProduct"/>
+    <view-map name="EditProduct" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#EditProduct"/>
+    <view-map name="FindProductFeature" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#FindProductFeature"/>
+    <view-map name="EditProductFeature" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#EditProductFeature"/>
+    <view-map name="FindProductCategory" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#FindProductCategory"/>
+    <view-map name="EditProductCategory" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#EditProductCategory"/>
+
+    <view-map name="FindPimProductPrice" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#FindPimProductPrice"/>
+    <view-map name="EditPimProductPrice" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#EditPimProductPrice"/>
+
+    <view-map name="FindPimProductFeatureAppl" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#FindPimProductFeatureAppl"/>
+    <view-map name="EditPimProductFeatureAppl" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#EditPimProductFeatureAppl"/>
+
+    <view-map name="FindPimProductAssoc" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#FindPimProductAssoc"/>
+    <view-map name="EditPimProductAssoc" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#EditPimProductAssoc"/>
+
+    <view-map name="FindPimProductCategoryRollup" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#FindPimProductCategoryRollup"/>
+    <view-map name="EditPimProductCategoryRollup" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#EditPimProductCategoryRollup"/>
+
+    <view-map name="FindPimProductCategoryMember" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#FindPimProductCategoryMember"/>
+    <view-map name="EditPimProductCategoryMember" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#EditPimProductCategoryMember"/>
+
+    <view-map name="FindPimGoodIdentification" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#FindPimGoodIdentification"/>
+    <view-map name="EditPimGoodIdentification" type="screen" page="component://productinformationmgr/widget/ProductinformationmgrScreens.xml#EditPimGoodIdentification"/>
+
+</site-conf>
