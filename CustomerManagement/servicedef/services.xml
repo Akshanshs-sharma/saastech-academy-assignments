@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/services.xsd">
+    <description>CustomerManagement Services</description>
+    <vendor>Apache OFBiz</vendor>
+    <version>1.0</version>
+    <!-- 1. Find Customer Service -->
+    <service name="findCustomer" engine="groovy"
+             location="component://CustomerManagement/groovyScripts/CustomerServices.groovy" invoke="findCustomer" auth="true">
+        <description>Search for customers using email, name, phone, or address filters</description>
+        <attribute name="emailAddress" type="String" mode="IN" optional="true"/>
+        <attribute name="firstName" type="String" mode="IN" optional="true"/>
+        <attribute name="lastName" type="String" mode="IN" optional="true"/>
+        <attribute name="contactNumber" type="String" mode="IN" optional="true"/>
+        <attribute name="address1" type="String" mode="IN" optional="true"/>
+        <attribute name="customerList" type="List" mode="OUT" optional="true"/>
+    </service>
+    <!-- 2. Create Customer Service -->
+    <service name="createCustomer" engine="groovy"
+             location="component://CustomerManagement/groovyScripts/CustomerServices.groovy" invoke="createCustomer" auth="true">
+        <description>Create a new customer (Person + Party + primary Email ContactMech)</description>
+        <attribute name="emailAddress" type="String" mode="IN" optional="false"/>
+        <attribute name="firstName" type="String" mode="IN" optional="false"/>
+        <attribute name="lastName" type="String" mode="IN" optional="false"/>
+        <attribute name="partyId" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!-- 3. Update Customer Service -->
+    <service name="updateCustomer" engine="groovy"
+             location="component://CustomerManagement/groovyScripts/CustomerServices.groovy" invoke="updateCustomer" auth="true">
+        <description>Update customer phone number and postal address using emailAddress as unique identifier</description>
+        <attribute name="emailAddress" type="String" mode="IN" optional="false"/>
+        <attribute name="contactNumber" type="String" mode="IN" optional="true"/>
+        <attribute name="countryCode" type="String" mode="IN" optional="true"/>
+        <attribute name="areaCode" type="String" mode="IN" optional="true"/>
+        <attribute name="address1" type="String" mode="IN" optional="true"/>
+        <attribute name="address2" type="String" mode="IN" optional="true"/>
+        <attribute name="city" type="String" mode="IN" optional="true"/>
+        <attribute name="postalCode" type="String" mode="IN" optional="true"/>
+        <attribute name="stateProvinceGeoId" type="String" mode="IN" optional="true"/>
+        <attribute name="countryGeoId" type="String" mode="IN" optional="true"/>
+        <attribute name="partyId" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!-- 4. Create Customer Relationship Service -->
+    <service name="createCustomerRelationship" engine="groovy"
+             location="component://CustomerManagement/groovyScripts/CustomerServices.groovy" invoke="createCustomerRelationship" auth="true">
+        <description>Establish a relationship between two parties</description>
+        <attribute name="partyIdFrom" type="String" mode="IN" optional="false"/>
+        <attribute name="partyIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="roleTypeIdFrom" type="String" mode="IN" optional="true" default-value="_NA_"/>
+        <attribute name="roleTypeIdTo" type="String" mode="IN" optional="true" default-value="_NA_"/>
+        <attribute name="partyRelationshipTypeId" type="String" mode="IN" optional="false"/>
+        <attribute name="fromDate" type="java.sql.Timestamp" mode="OUT" optional="true"/>
+    </service>
+    <!-- 5. Update Customer Relationship Service -->
+    <service name="updateCustomerRelationship" engine="groovy"
+             location="component://CustomerManagement/groovyScripts/CustomerServices.groovy" invoke="updateCustomerRelationship" auth="true">
+        <description>Update the status of a relationship between two parties</description>
+        <attribute name="partyIdFrom" type="String" mode="IN" optional="false"/>
+        <attribute name="partyIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="roleTypeIdFrom" type="String" mode="IN" optional="false"/>
+        <attribute name="roleTypeIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="fromDate" type="java.sql.Timestamp" mode="IN" optional="false"/>
+        <attribute name="statusId" type="String" mode="IN" optional="false"/>
+    </service>
+</services>
