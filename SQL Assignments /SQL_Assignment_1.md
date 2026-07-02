@@ -82,9 +82,9 @@ SELECT p.product_id,
        p.internal_name,
        p.product_type_id
 FROM product p
-JOIN good_identification gi
-    ON p.product_id = gi.PRODUCT_ID
-WHERE gi.GOOD_IDENTIFICATION_TYPE_ID <> 'ERP_ID';
+LEFT JOIN good_identification gi
+    ON p.product_id = gi.PRODUCT_ID AND gi.GOOD_IDENTIFICATION_TYPE_ID = 'ERP_ID'
+WHERE gi.id_value IS NULL ;
 ```
 
 ---
