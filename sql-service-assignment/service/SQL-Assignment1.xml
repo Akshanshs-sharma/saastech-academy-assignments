@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+    <service verb="get" noun="A1Q02ActivePhysicalProducts" authenticate="false">
+        <description>Service to get physical products that are not virtual using SQL interceptor hack</description>
+        <out-parameters>
+            <parameter name="productList" type="List"/>
+            <parameter name="renderedSql" type="String"/>
+        </out-parameters>
+        <actions>
+            <script><![CDATA[
+                import org.moqui.entity.EntityDynamicView
+                import org.moqui.impl.entity.EntityFindBase
+                import org.moqui.impl.entity.EntityFindBuilder
+                import org.moqui.impl.entity.FieldInfo
+                import org.moqui.impl.entity.condition.EntityConditionImplBase
+                import org.moqui.entity.EntityCondition
+                import java.util.Arrays
+
+                // 1. Create the find object for Product (PRD)
+                def find = ec.entity.find("org.apache.ofbiz.product.product.Product")
+
+                // 2. Construct the dynamic view
+                EntityDynamicView dynamicView = find.makeEntityDynamicView()
+                
+                // Add Product member entity
+                dynamicView.addMemberEntity("PRD", "org.apache.ofbiz.product.product.Product", null, null, null)
+                
+                // Join ProductType member entity on productTypeId
+                dynamicView.addMemberEntity("PT", "org.apache.ofbiz.product.product.ProductType", "PRD", false, ["productTypeId": "productTypeId"])
+                
+                // Add aliases
+                dynamicView.addAlias("PRD", "productId")
+                dynamicView.addAlias("PRD", "productTypeId")
+                dynamicView.addAlias("PRD", "internalName")
+                dynamicView.addAlias("PT", "isPhysical")
+                dynamicView.addAlias("PRD", "isVirtual")
+
+                // 3. Define query conditions
+                find.condition("isPhysical", "Y")
+                find.condition("isVirtual", EntityCondition.NOT_EQUAL, "Y")
+
+                // 4. Select fields
+                find.selectFields(["productId", "productTypeId", "internalName"])
+
+                // 5. Cast to EntityFindBase to access the internal query representation
+                EntityFindBase findBase = (EntityFindBase) find
+                def ed = findBase.getEntityDef()
+                def whereCondition = (EntityConditionImplBase) findBase.getWhereEntityCondition()
+
+                // Get selected fields and build FieldInfo array
+                def fieldsToSelect = findBase.getSelectFields()
+                int ftsSize = fieldsToSelect != null ? fieldsToSelect.size() : 0
+                FieldInfo[] fieldInfoArray
+                if (ftsSize == 0) {
+                    fieldInfoArray = ed.entityInfo.allFieldInfoArray
+                } else {
+                    fieldInfoArray = new FieldInfo[ftsSize]
+                    for (int i = 0; i < ftsSize; i++) {
+                        String fieldName = (String) fieldsToSelect.get(i)
+                        fieldInfoArray[i] = ed.getFieldInfo(fieldName)
+                    }
+                }
+
+                // 6. Invoke EntityFindBuilder manually to compile the SQL query
+                EntityFindBuilder efb = new EntityFindBuilder(ed, findBase, whereCondition, fieldInfoArray)
+                try {
+                    boolean addUniqueAs = "true".equals(findBase.efi.getDatabaseNode(ed.getEntityGroupName()).attribute("add-unique-as"))
+                    efb.makeSqlSelectFields(fieldInfoArray, null, addUniqueAs)
+                    efb.makeSqlFromClause()
+                    efb.makeWhereClause()
+                    efb.makeGroupByClause()
+                    if (findBase.getOrderByFields()) {
+                        efb.makeOrderByClause(findBase.getOrderByFields(), findBase.getLimit() != null || findBase.getOffset() != null)
+                    }
+                    efb.addLimitOffset(findBase.getLimit(), findBase.getOffset())
+
+                    // 7. Intercept and print the SQL
+                    String sql = efb.sqlTopLevel.toString()
+
+                    ec.logger.warn("=======================================================")
+                    ec.logger.warn("  PART 4: INTERCEPTED SQL BEFORE DATABASE EXECUTION!   ")
+                    ec.logger.warn("=======================================================")
+                    ec.logger.warn("" + sql)
+                    ec.logger.warn("=======================================================")
+
+                    renderedSql = sql
+                } finally {
+                    efb.close()
+                }
+
+                // Set output parameters (without executing the query)
+                productList = []
+            ]]></script>
+        </actions>
+    </service>
+
+</services>

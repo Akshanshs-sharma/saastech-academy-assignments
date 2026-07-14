@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+    <service verb="test" noun="MyFirstQuery">
+        <out-parameters>
+            <parameter name="results" type="List"/>
+        </out-parameters>
+        <actions>
+            <script>
+                // Your query goes here
+                results = ec.entity.find("moqui.usl.party.Party").limit(5).list()
+                
+                // Print to console!
+                ec.logger.warn("===== MY FIRST QUERY =====")
+                ec.logger.warn(results.toString())
+                ec.logger.warn("==========================")
+            </script>
+        </actions>
+    </service>
+
+</services>
