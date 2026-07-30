@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+
+    <!-- ==================================================================== -->
+    <!-- STEP 1: PARTIES & ROLES (Declared first to satisfy foreign keys)    -->
+    <!-- ==================================================================== -->
+
+    <!-- Customer Party & Roles -->
+    <Party partyId="MARK_TAILOR" partyTypeId="PERSON" statusId="PARTY_ENABLED"/>
+    <Person partyId="MARK_TAILOR" firstName="Mark" lastName="Tailor"/>
+    <PartyRole partyId="MARK_TAILOR" roleTypeId="CUSTOMER"/>
+    <PartyRole partyId="MARK_TAILOR" roleTypeId="BILL_TO_CUSTOMER"/>
+    <PartyRole partyId="MARK_TAILOR" roleTypeId="END_USER_CUSTOMER"/>
+    <PartyRole partyId="MARK_TAILOR" roleTypeId="PLACING_CUSTOMER"/>
+    <PartyRole partyId="MARK_TAILOR" roleTypeId="SHIP_TO_CUSTOMER"/>
+
+    <!-- Company Party & Role -->
+    <Party partyId="COMPANY" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="COMPANY" groupName="Default Company"/>
+    <PartyRole partyId="COMPANY" roleTypeId="BILL_FROM_VENDOR"/>
+
+    <!-- Carrier Parties & Roles -->
+    <Party partyId="UPS" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"/>
+    <PartyRole partyId="UPS" roleTypeId="CARRIER"/>
+
+    <Party partyId="FEDEX" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"/>
+    <PartyRole partyId="FEDEX" roleTypeId="CARRIER"/>
+
+
+    <!-- ==================================================================== -->
+    <!-- STEP 2: ACTIVITY 1 – Create New Order (HWMDEMO1000)                  -->
+    <!-- ==================================================================== -->
+
+    <OrderHeader orderId="HWMDEMO1000" orderTypeId="SALES_ORDER" salesChannelEnumId="WEB_SALES_CHANNEL" orderDate="2026-07-01 10:00:00.000" entryDate="2026-07-01 10:00:00.000" statusId="ORDER_CREATED" createdBy="admin" currencyUom="USD" productStoreId="STORE" remainingSubTotal="289.49" grandTotal="289.49"/>
+
+    <OrderRole orderId="HWMDEMO1000" partyId="COMPANY" roleTypeId="BILL_FROM_VENDOR"/>
+    <OrderRole orderId="HWMDEMO1000" partyId="MARK_TAILOR" roleTypeId="BILL_TO_CUSTOMER"/>
+    <OrderRole orderId="HWMDEMO1000" partyId="MARK_TAILOR" roleTypeId="END_USER_CUSTOMER"/>
+    <OrderRole orderId="HWMDEMO1000" partyId="MARK_TAILOR" roleTypeId="PLACING_CUSTOMER"/>
+    <OrderRole orderId="HWMDEMO1000" partyId="MARK_TAILOR" roleTypeId="SHIP_TO_CUSTOMER"/>
+
+    <OrderItem orderId="HWMDEMO1000" orderItemSeqId="00001" orderItemTypeId="PRODUCT_ORDER_ITEM" productId="WOMENS-SAREE" prodCatalogId="DIWALI_DHAMAKA" isPromo="N" quantity="1.0" unitPrice="199.99" unitListPrice="199.99" itemDescription="Designer Silk Saree" statusId="ITEM_CREATED"/>
+    <OrderItem orderId="HWMDEMO1000" orderItemSeqId="00002" orderItemTypeId="PRODUCT_ORDER_ITEM" productId="MENS-KURTA" prodCatalogId="DIWALI_DHAMAKA" isPromo="N" quantity="1.0" unitPrice="89.50" unitListPrice="89.50" itemDescription="Men's Festive Kurta Set" statusId="ITEM_CREATED"/>
+
+    <OrderItemShipGroup orderId="HWMDEMO1000" shipGroupSeqId="00001" shipmentMethodTypeId="GROUND" carrierPartyId="UPS" carrierRoleTypeId="CARRIER" maySplit="N" isGift="N"/>
+    <OrderItemShipGroupAssoc orderId="HWMDEMO1000" orderItemSeqId="00001" shipGroupSeqId="00001" quantity="1.0"/>
+    <OrderItemShipGroupAssoc orderId="HWMDEMO1000" orderItemSeqId="00002" shipGroupSeqId="00001" quantity="1.0"/>
+
+    <OrderStatus orderStatusId="OS_1000_1" statusId="ORDER_CREATED" orderId="HWMDEMO1000" statusDatetime="2026-07-01 10:00:00.000" statusUserLogin="admin"/>
+    <OrderPaymentPreference orderPaymentPreferenceId="OPP_1000" orderId="HWMDEMO1000" paymentMethodTypeId="CREDIT_CARD" maxAmount="289.49" statusId="PAYMENT_NOT_AUTH" createdDate="2026-07-01 10:00:00.000" createdByUserLogin="admin"/>
+
+
+    <!-- ==================================================================== -->
+    <!-- STEP 3: ACTIVITIES 2, 3 & 4 – Order HWMDEMO1001 & Shipment HwmDemo1000-->
+    <!-- ==================================================================== -->
+
+    <OrderHeader orderId="HWMDEMO1001" orderTypeId="SALES_ORDER" salesChannelEnumId="WEB_SALES_CHANNEL" orderDate="2026-07-02 11:00:00.000" entryDate="2026-07-02 11:00:00.000" statusId="ORDER_COMPLETED" createdBy="admin" currencyUom="USD" productStoreId="STORE" remainingSubTotal="62.99" grandTotal="62.99"/>
+
+    <OrderRole orderId="HWMDEMO1001" partyId="COMPANY" roleTypeId="BILL_FROM_VENDOR"/>
+    <OrderRole orderId="HWMDEMO1001" partyId="MARK_TAILOR" roleTypeId="BILL_TO_CUSTOMER"/>
+    <OrderRole orderId="HWMDEMO1001" partyId="MARK_TAILOR" roleTypeId="END_USER_CUSTOMER"/>
+    <OrderRole orderId="HWMDEMO1001" partyId="MARK_TAILOR" roleTypeId="PLACING_CUSTOMER"/>
+    <OrderRole orderId="HWMDEMO1001" partyId="MARK_TAILOR" roleTypeId="SHIP_TO_CUSTOMER"/>
+
+    <OrderItem orderId="HWMDEMO1001" orderItemSeqId="00001" orderItemTypeId="PRODUCT_ORDER_ITEM" productId="KAJU-KATLI" prodCatalogId="DIWALI_DHAMAKA" isPromo="N" quantity="2.0" unitPrice="25.00" unitListPrice="25.00" itemDescription="Premium Kaju Katli (1KG)" statusId="ITEM_COMPLETED"/>
+    <OrderItem orderId="HWMDEMO1001" orderItemSeqId="00002" orderItemTypeId="PRODUCT_ORDER_ITEM" productId="DIYA-SET" prodCatalogId="DIWALI_DHAMAKA" isPromo="N" quantity="1.0" unitPrice="12.99" unitListPrice="12.99" itemDescription="Handcrafted Terracotta Diya Set" statusId="ITEM_COMPLETED"/>
+
+    <OrderItemShipGroup orderId="HWMDEMO1001" shipGroupSeqId="00001" shipmentMethodTypeId="GROUND" carrierPartyId="UPS" carrierRoleTypeId="CARRIER" maySplit="N" isGift="N"/>
+    <OrderItemShipGroupAssoc orderId="HWMDEMO1001" orderItemSeqId="00001" shipGroupSeqId="00001" quantity="2.0"/>
+    <OrderItemShipGroupAssoc orderId="HWMDEMO1001" orderItemSeqId="00002" shipGroupSeqId="00001" quantity="1.0"/>
+
+    <OrderStatus orderStatusId="OS_1001_1" statusId="ORDER_CREATED" orderId="HWMDEMO1001" statusDatetime="2026-07-02 11:00:00.000" statusUserLogin="admin"/>
+    <OrderStatus orderStatusId="OS_1001_2" statusId="ORDER_APPROVED" orderId="HWMDEMO1001" statusDatetime="2026-07-02 11:05:00.000" statusUserLogin="admin"/>
+    <OrderStatus orderStatusId="OS_1001_3" statusId="ORDER_CANCELLED" orderId="HWMDEMO1001" statusDatetime="2026-07-02 12:00:00.000" statusUserLogin="admin"/>
+    <OrderStatus orderStatusId="OS_1001_4" statusId="ORDER_COMPLETED" orderId="HWMDEMO1001" statusDatetime="2026-07-02 14:00:00.000" statusUserLogin="admin"/>
+
+    <OrderPaymentPreference orderPaymentPreferenceId="OPP_1001_DISC" orderId="HWMDEMO1001" paymentMethodTypeId="CREDIT_CARD" maxAmount="62.99" statusId="PAYMENT_CANCELLED" createdDate="2026-07-02 11:00:00.000" createdByUserLogin="admin"/>
+    <OrderPaymentPreference orderPaymentPreferenceId="OPP_1001_COD" orderId="HWMDEMO1001" paymentMethodTypeId="EXT_COD" maxAmount="62.99" statusId="PAYMENT_CANCELLED" createdDate="2026-07-02 12:00:00.000" createdByUserLogin="admin"/>
+    <OrderPaymentPreference orderPaymentPreferenceId="OPP_1001_AMEX" orderId="HWMDEMO1001" paymentMethodTypeId="CREDIT_CARD" maxAmount="62.99" statusId="PAYMENT_SETTLED" createdDate="2026-07-02 14:00:00.000" createdByUserLogin="admin"/>
+
+    <!-- Shipment Record with valid statusId="SHIPMENT_SHIPPED" -->
+    <Shipment shipmentId="HwmDemo1000" shipmentTypeId="SALES_SHIPMENT" statusId="SHIPMENT_SHIPPED" primaryOrderId="HWMDEMO1001" primaryShipGroupSeqId="00001" partyIdTo="MARK_TAILOR" partyIdFrom="COMPANY" createdDate="2026-07-02 14:00:00.000" createdByUserLogin="admin"/>
+    <ShipmentItem shipmentId="HwmDemo1000" shipmentItemSeqId="00001" productId="KAJU-KATLI" quantity="2.0"/>
+    <ShipmentItem shipmentId="HwmDemo1000" shipmentItemSeqId="00002" productId="DIYA-SET" quantity="1.0"/>
+
+    <OrderShipment orderId="HWMDEMO1001" orderItemSeqId="00001" shipGroupSeqId="00001" shipmentId="HwmDemo1000" shipmentItemSeqId="00001" quantity="2.0"/>
+    <OrderShipment orderId="HWMDEMO1001" orderItemSeqId="00002" shipGroupSeqId="00001" shipmentId="HwmDemo1000" shipmentItemSeqId="00002" quantity="1.0"/>
+
+</entity-engine-xml>
+

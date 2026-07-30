@@ -57,7 +57,7 @@
     <ProductCategoryMember productCategoryId="DECORATIONS" productId="LED-FAIRY-LIGHTS" fromDate="2024-10-01 00:00:00.0" sequenceNum="2"/>
     
     <!-- Product Store to Catalog Association (Assuming store 9000 like in your example) -->
-    <ProductStoreCatalog productStoreId="9000" prodCatalogId="DIWALI_DHAMAKA" fromDate="2024-10-01 00:00:00.0" sequenceNum="3"/>
+    <ProductStoreCatalog productStoreId="STORE" prodCatalogId="DIWALI_DHAMAKA" fromDate="2024-10-01 00:00:00.0" sequenceNum="3"/>
 
 </entity-engine-xml>
 

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+
+    <!-- ==================================================================== -->
+    <!-- ACTIVITY 1 – Company Information                                    -->
+    <!-- ==================================================================== -->
+    <!-- Create Company Party & PartyGroup with Logo URL -->
+    <Party partyId="COMPANY" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="COMPANY" groupName="Default Company" logoImageUrl="/resources/uploads/images/company_logo.png"/>
+
+
+    <!-- ==================================================================== -->
+    <!-- ACTIVITY 2 – Company Roles                                          -->
+    <!-- ==================================================================== -->
+    <!-- Assign specific roles to the Company -->
+    <PartyRole partyId="COMPANY" roleTypeId="BILL_FROM_VENDOR"/>
+    <PartyRole partyId="COMPANY" roleTypeId="SHIP_FROM_VENDOR"/>
+    <PartyRole partyId="COMPANY" roleTypeId="BILL_TO_CUSTOMER"/>
+    <PartyRole partyId="COMPANY" roleTypeId="INTERNAL_ORGANIZATIO"/>
+    <PartyRole partyId="COMPANY" roleTypeId="SUPPLIER_AGENT"/>
+    <PartyRole partyId="COMPANY" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="COMPANY" roleTypeId="VENDOR"/>
+
+
+    <!-- ==================================================================== -->
+    <!-- ACTIVITY 3 – Product Store Group                                    -->
+    <!-- ==================================================================== -->
+    <!-- Create Store Group -->
+    <ProductStoreGroup productStoreGroupId="STORE_GROUP" 
+                       productStoreGroupName="Company Store Group" 
+                       description="Company Store Group"/>
+
+
+    <!-- ==================================================================== -->
+    <!-- ACTIVITY 4 – Product Store                                          -->
+    <!-- ==================================================================== -->
+    <!-- Create Product Store with configured attributes -->
+    <ProductStore productStoreId="STORE" 
+                  storeName="Demo Store" 
+                  companyName="Default Company" 
+                  payToPartyId="COMPANY" 
+                  primaryStoreGroupId="STORE_GROUP" 
+                  reserveInventory="N" 
+                  defaultLocaleString="en_US" 
+                  defaultCurrencyUomId="USD" 
+                  defaultSalesChannelEnumId="WEB_SALES_CHANNEL" 
+                  autoApproveOrder="Y" 
+                  autoApproveInvoice="Y"/>
+
+    <!-- Associate Product Store with Product Store Group -->
+    <ProductStoreGroupMember productStoreGroupId="STORE_GROUP" 
+                            productStoreId="STORE" 
+                            fromDate="2026-01-01 00:00:00.000"/>
+
+</entity-engine-xml>
+
